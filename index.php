@@ -18,7 +18,10 @@
             </tr>
             <tr height="40px">
                 <td><b>Email</b></td>
-                <td> <input type="text" name=""></td>
+                
+                <td>
+                <p id='emailP'></p> 
+                    <input onblur="emailVal(this)" type="text" name=""></td>
                 <td></td>
             </tr>
             <tr height="40px">
@@ -151,6 +154,18 @@ function yearVal(e){
 
    }
 }
+
+
+function emailVal(e){
+    var val =  e.value;
+    var obj = document.getElementById('emailP');
+    obj.innerHTML = 'invalid';
+    if(val=="")
+    {
+        
+    }
+}
+
 
 
 // function bloodVal(){
