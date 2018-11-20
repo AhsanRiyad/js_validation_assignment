@@ -5,13 +5,13 @@
 </head>
 <body>
   <form>
-    <table border="1" width="500px" align="center">
+    <table border="1" width="600px" align="center">
       <tr height="100px">
         <td colspan="3" align="center"><h2>PERSON PROFILE</h2></td>
       </tr>
       <tr height="40px">
         <td width="100px"><b>Name</b></td>
-        <td width="350px"> <input type="text" name="" > <br>
+        <td width="350px"> <input onblur="nameVal(this);" type="text" name="" id='IdInputName'> <br>
         </td>
         <td></td>
       </tr>
@@ -42,7 +42,7 @@
         <tr height="40px">
           <td><b>Blood Group</b></td>
           <td>
-            <select id='bloodGrp'>
+            <select >
               <option value="A+">A+</option>
               <option value="A-">A-</option>
               <option value="B+">B+</option>
@@ -80,6 +80,27 @@
 
     <script type="text/javascript">
 
+      function nameVal(e){
+        var value = e.value.trim();
+        var BlankTd =  e.parentNode.parentNode.lastElementChild;
+        BlankTd.innerHTML = 'wrong';
+        //BlankTd.innerHTML = value[0];
+
+        if(value === ''){
+          BlankTd.innerHTML = 'Name can not be empty';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+
+        }        
+        else if(value.charCodeAt(0) > 48 || value.charCodeAt(0) < 57){
+          BlankTd.innerHTML = "First letter can't be number";
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+        
+        //console.log(value.charCodeAt(0));
+
+      }
 
 
     </script>
