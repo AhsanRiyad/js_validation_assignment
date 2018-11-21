@@ -323,7 +323,7 @@
           }
           
         }
-        
+
 
 
       }
@@ -538,7 +538,13 @@
           BlankTd.style.color = 'white';
         }
         //month validation
-        if(month.value == "")
+        if(month.value < 0)
+        {
+          BlankTd.innerHTML = "month negetive vulue not allowed";
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+        else if(month.value == "")
         {
           BlankTd.innerHTML = 'month can not be empty';
           BlankTd.style.background = 'red';
@@ -561,7 +567,13 @@
         //day validation
         if(day.value !="")
         {
-          if(leapYearStatus==false && month.value == 2 && day.value > 28)
+          if(day.value < 0)
+          {
+            BlankTd.innerHTML = "day negetive vulue not allowed";
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+          }
+          else if(leapYearStatus==false && month.value == 2 && day.value > 28)
           {
             BlankTd.innerHTML = "Not a leap year detected; february can be more than 28";
             BlankTd.style.background = 'red';
