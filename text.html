@@ -6,50 +6,30 @@
 
 
 <script>
-	//continue statement does not support in switch case// but if 
 	
-	function checkValidChar(value){
-        for(var i=0; i<value.length; i++){
-          var val = value.charCodeAt(i);        
-          switch(true)
-          {
-            case (val>=65 && val<=90): //a-z
-            console.log('A-Z');
-            continue;
-            case (val>=97 && val<=122): //A-Z
-            console.log('a-z');
-            continue;
-            case (val == 32 || val == 45 || val == 46): // space , - , .
-            console.log('Other caracter');
-            continue;
-            default:
-            return false;
-            
-          }
-        }
-      }
-
-      function checkValidChar1(value){
-        for(var i=0; i<value.length; i++){
-          var val = value.charCodeAt(i);        
-          console.log(val);
-
-        }
-      }
-
-      if(checkValidChar('riyadR->')==false)
-      {
-      	console.log('invalid');
-      }
-      // if(!checkValidChar1('riyad2'))
-      // {
-      // 	console.log('invalid');
-      // }
-      // else{
-      // 	console.log('true');
-      // }
-
+	function checkNameArray(fullName){
 	
+		for(var i=0 ; i< fullName.length ; i++)
+	{
+		
+		if( fullName[i].length  == 0)
+		{
+			return 'multiple space detected';
+		}
+		else if( fullName[i].length  == 1)
+		{
+			return 'name too short';
+		}
+		
+
+	}
+	return 'okay';
+	}
+	var fullName  =  "Ahsan   Friyad";
+	var array1 = fullName.split(' ');
+
+    console.log( checkNameArray(array1));
+      
 
 
 

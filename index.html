@@ -147,34 +147,36 @@
       }
 
       //array element length check
-      function arrayElementLengthCheck(Array){
-        for(var i=0; i<Array.length; i++)
+      function checkNameArray(fullName , BlankTd){
+
+        for(var i=0 ; i< fullName.length ; i++)
         {
-          
+
+          if( fullName[i].length  == 0)
+          {
+            BlankTd.innerHTML = 'multiple space detected';
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+            return 'multiple space detected';
+          }
+          else if( fullName[i].length  == 1)
+          {
+            BlankTd.innerHTML = 'name too short';
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+            return 'name too short';
+          }
+
+
         }
+        BlankTd.innerHTML = 'Valid';
+        BlankTd.style.background = 'green';
+        BlankTd.style.color = 'white';
+        return 'okay';
       }
 
 
-
-      // function checkValidChar1(val)
-      // {
-      //   for(var i = 0; i< val.length ; i++){
-      //     if(val.charCodeAt(0) >= 65 && val.charCodeAt(0) <= 90){
-      //       continue;
-      //     }
-      //     else if(val.charCodeAt(0) >= 97 && val.charCodeAt(0) <= 122){
-      //       continue;
-      //     }
-      //     else if(val.charCodeAt(0) == 32 || val.charCodeAt(0) == 45 || val.charCodeAt(0) == 46){
-      //       continue;
-      //     }
-      //     else{
-      //       return false;
-      //     }
-      //   }
-      // }
-
-
+      //name validation function
       function nameVal(e){
         var value = e.value.trim();
         var BlankTd =  e.parentNode.parentNode.lastElementChild;
@@ -207,16 +209,10 @@
           BlankTd.style.color = 'white';
           return;
         }
-        
-        else{
-          BlankTd.innerHTML = 'Valid';
-          BlankTd.style.background = 'green';
-          BlankTd.style.color = 'white';
-          return;
+        else if(value.search(' ')>-1){
+          checkNameArray(valueSplitOnSpace , BlankTd);
+          return;          
         }
-
-        //console.log(value.charCodeAt(0));
-
       }
 
 
