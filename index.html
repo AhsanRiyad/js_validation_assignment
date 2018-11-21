@@ -313,21 +313,43 @@
             BlankTd.style.color = 'white';
             return;     
           }
+          else if(responseT == 'space')
+          {
+            BlankTd.innerHTML = 'value after @ expected';
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+            return;  
+          }
           else{
-            var valueSplitOnDot = valueSplitOnAtTheRateOf[1].split('.');
-            responseT =  checkNameArray(valueSplitOnDot);
-            if(responseT == 'short'){
-              BlankTd.innerHTML = 'domain/extention too short';
-              BlankTd.style.background = 'red';
-              BlankTd.style.color = 'white';
-              return;     
+
+            if(valueSplitOnAtTheRateOf[1].search('.')>-1){
+              var valueSplitOnDot = valueSplitOnAtTheRateOf[1].split('.');
+              responseT =  checkNameArray(valueSplitOnDot);
+              if(responseT == 'short'){
+                BlankTd.innerHTML = 'domain/extention too short';
+                BlankTd.style.background = 'red';
+                BlankTd.style.color = 'white';
+                return;     
+              }
+              else if(responseT == 'space')
+              {
+                BlankTd.innerHTML = 'value after . expected';
+                BlankTd.style.background = 'red';
+                BlankTd.style.color = 'white';
+                return;  
+              }
+              else{
+                BlankTd.innerHTML = "valid";
+                BlankTd.style.background = 'green';
+                BlankTd.style.color = 'white';
+              }
+
             }
             else{
-              BlankTd.innerHTML = "valid";
-              BlankTd.style.background = 'green';
+              BlankTd.innerHTML = ' . expected';
+              BlankTd.style.background = 'red';
               BlankTd.style.color = 'white';
             }
-            
           }
         }
 
