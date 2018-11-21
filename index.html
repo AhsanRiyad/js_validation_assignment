@@ -180,25 +180,19 @@
 
           if( fullName[i].length  == 0)
           {
-            BlankTd.innerHTML = 'multiple space detected';
-            BlankTd.style.background = 'red';
-            BlankTd.style.color = 'white';
-            return 'multiple space detected';
+
+            return 'space'; //multiple space detected
           }
           else if( fullName[i].length  == 1)
           {
-            BlankTd.innerHTML = 'name too short';
-            BlankTd.style.background = 'red';
-            BlankTd.style.color = 'white';
-            return 'name too short';
+
+            return 'short'; //name too short
           }
 
 
         }
-        BlankTd.innerHTML = 'Valid';
-        BlankTd.style.background = 'green';
-        BlankTd.style.color = 'white';
-        return 'okay';
+        
+        return 'okay'; //no problem ; validate it;
       }
 
 
@@ -236,8 +230,28 @@
           return;
         }
         else if(value.search(' ')>-1){
-          checkNameArray(valueSplitOnSpace , BlankTd);
-          return;          
+          var responseT =  checkNameArray(valueSplitOnSpace , BlankTd);
+          if(responseT == 'space')
+          {
+            BlankTd.innerHTML = 'multiple space detected';
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+            return;     
+          }
+          else if(responseT == 'short'){
+            BlankTd.innerHTML = 'name too short';
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+            return;     
+          }
+          else if(responseT == 'okay')
+          {
+            BlankTd.innerHTML = 'Valid';
+            BlankTd.style.background = 'green';
+            BlankTd.style.color = 'white';
+            return;     
+          }
+       
         }
       }
 
