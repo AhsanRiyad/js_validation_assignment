@@ -1,38 +1,30 @@
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
 
-
+<td>
+	<input type="radio" name="Gender" value="1">Male
+	<input type="radio" name="Gender" value="2">Female
+	<input type="radio" name="Gender" value="3">Other
+</td>
 
 
 
 <script>
-	
-	function checkNameArray(fullName){
-	
-		for(var i=0 ; i< fullName.length ; i++)
+	function radioChck(e){
+
+	var radios = document.getElementsByName('Gender');
+	for (var i = 0, length = radios.length; i < length; i++)
 	{
-		
-		if( fullName[i].length  == 0)
+		if (radios[i].checked)
 		{
-			return 'multiple space detected';
+  // do whatever you want with the checked radio
+  		alert(radios[i].value);
+
+  // only one radio can be logically checked, don't check the rest
+  		break;
 		}
-		else if( fullName[i].length  == 1)
-		{
-			return 'name too short';
-		}
-		
-
 	}
-	return 'okay';
-	}
-	var fullName  =  "Ahsan Friyad.fff";
-	var array1 = fullName.split(' ');
-	var array2 = array1[1].split('.');
-
-
-    console.log( checkNameArray(array2));
-      
-
+}
 
 
 

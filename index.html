@@ -22,24 +22,24 @@
       </tr>
       <tr height="40px">
         <td width="100px"><b>Name</b></td>
-        <td width="350px"> <input onblur="nameVal(this);" type="text" name="" id='IdInputName'> <br>
+        <td width="350px"> <input type="text" name="" id='IdInputName'> <br>
         </td>
         <td class="valStatus">Validation Status</td>
       </tr>
       <tr height="40px">
         <td><b>Email</b></td>                
         <td>
-          <input onblur="emailVal(this);" type="text" name=""></td>
+          <input id="IdInputEmail" type="text" name=""></td>
           <td class="valStatus">Validation Status</td>
         </tr>
         <tr height="40px">
           <td><b>Gender</b></td>
           <td>
-            <input type="radio" name="Gender" >Male
-            <input type="radio" name="Gender" >Female
-            <input type="radio" name="Gender" >Other
+            <input type="radio" name="Gender" value="Male">Male
+            <input type="radio" name="Gender" value="Female">Female
+            <input type="radio" name="Gender" value="Other">Other
           </td>
-          <td class="valStatus">Validation Status</td>
+          <td class="valStatus" id="IdGenderValStatus">Validation Status</td>
         </tr>
         <tr height="40px">
           <td><b>Date of Berth</b></td>
@@ -82,7 +82,7 @@
         </tr>
         <tr>
           <td colspan="3" height="40px" align="right">
-            <input type="submit" name="" value="Submit">
+            <input onclick="validateAll();" type="button" name="" value="Submit">
             <input type="reset" name="" value="Reset">
           </td>
         </tr>
@@ -197,9 +197,10 @@
 
 
       //name validation function
-      function nameVal(e){
-        var value = e.value.trim();
-        var BlankTd =  e.parentNode.parentNode.lastElementChild;
+      function nameVal(){
+        var obj = document.getElementById('IdInputName');
+        var value = obj.value.trim();
+        var BlankTd =  obj.parentNode.parentNode.lastElementChild;
         var valueSplitOnSpace = value.split(' ');
 
 
@@ -257,9 +258,10 @@
 
 
       //email validation
-      function emailVal(e){
-        var value = e.value.trim();
-        var BlankTd =  e.parentNode.parentNode.lastElementChild;
+      function emailVal(){
+        var obj = document.getElementById('IdInputEmail');
+        var value = obj.value.trim();
+        var BlankTd =  obj.parentNode.parentNode.lastElementChild;
         var valueSplitOnAtTheRateOf = value.split('@');
 
 
@@ -329,6 +331,42 @@
         }
 
 
+
+      }
+
+      // Gender Validation complete
+      function genderVal(){
+        var radios = document.getElementsByName('Gender');
+        var BlankTd = document.getElementById('IdGenderValStatus');
+        var genderValueHolder = "";
+        for (var i = 0, length = radios.length; i < length; i++)
+        {
+          if (radios[i].checked)
+          {
+            genderValueHolder =  radios[i].value;
+            break;
+          }
+
+        }
+        if(genderValueHolder==""){
+          BlankTd.innerHTML = 'one item must be selected';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+        else{
+          BlankTd.innerHTML = "valid";
+          BlankTd.style.background = 'green';
+          BlankTd.style.color = 'white';
+        }
+
+
+
+      }
+
+      function validateAll(){
+        nameVal();
+        emailVal();
+        genderVal();
 
       }
 
