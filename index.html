@@ -71,7 +71,7 @@
             <input type="checkbox" name="degree">BSc.
             <input type="checkbox" name="degree">MSc.
           </td>
-          <td class="valStatus">Validation Status</td>
+          <td class="valStatus" id="IdDegreeValStatus">Validation Status</td>
         </tr>
         <!-- <tr height="40px">
           <td><b>Photo</b></td>
@@ -384,11 +384,36 @@
       }
 
 
+      function valDegree(){
+        var obj = document.getElementsByName('degree');
+        var BlankTd = document.getElementById('IdDegreeValStatus');
+        var valueArray = [];
+        for(var i =0; i<obj.length ; i++)
+        {
+          if(obj[i].checked == true)
+          {
+            valueArray.push(obj[i].value);
+          }
+        }
+        if(valueArray.length>0)
+        {
+          BlankTd.innerHTML = "valid";
+          BlankTd.style.background = 'green';
+          BlankTd.style.color = 'white';
+        }
+        else{
+          BlankTd.innerHTML = 'one item must be selected';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+      }
+
       function validateAll(){
         nameVal();
         emailVal();
         genderVal();
         valBloodGroup();
+        valDegree();
 
       }
 

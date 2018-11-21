@@ -9,7 +9,7 @@
 
 
 <script>
-	function valBloodGroup(){
+	function valEducation(){
 		var obj = document.getElementsByName('degree');
 		var valueArray = [];
 		for(var i =0; i<obj.length ; i++)
@@ -19,14 +19,18 @@
 				valueArray.push(obj[i].value);
 			}
 		}
-		valueArray.forEach(myFun)
+		if(valueArray.length>0)
+		{
+
+		}
+		// valueArray.forEach(myFun)
 
 
 	}
 
-	function myFun(value){
-		console.log(value);
-	}
+	// function myFun(value){
+	// 	console.log(value);
+	// }
 
 
 </script>
