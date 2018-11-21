@@ -87,15 +87,20 @@
     <script type="text/javascript">
 
       function checkCharacter(val){
-        if(val.charCodeAt(0) >= 65 && val.charCodeAt(0) <= 90){
+        val = val.charCodeAt(0);        
+        switch(val)
+        {
+          case (val>=65 && val<=90):
           return true;
-        }
-        else if(val.charCodeAt(0) >= 97 && val.charCodeAt(0) <= 122){
+          case (val>=97 && val<=122)
           return true;
-        }
-        else{
+          default:
           return false;
+
         }
+
+
+
 
       }
 
