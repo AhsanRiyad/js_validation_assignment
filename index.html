@@ -322,7 +322,7 @@
           }
           else{
 
-            if(valueSplitOnAtTheRateOf[1].search('.')>-1){
+            if(valueSplitOnAtTheRateOf[1].indexOf('.')>-1){
               var valueSplitOnDot = valueSplitOnAtTheRateOf[1].split('.');
               
               if(valueSplitOnDot.length>1){
@@ -347,7 +347,7 @@
               }
             }
             else{
-              BlankTd.innerHTML = ' . expected';
+              BlankTd.innerHTML = 'domain/extention missing '+valueSplitOnAtTheRateOf[1].search('.') + valueSplitOnAtTheRateOf[1];
               BlankTd.style.background = 'red';
               BlankTd.style.color = 'white';
             }
