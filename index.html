@@ -92,12 +92,25 @@
           BlankTd.style.color = 'white';
 
         }        
-        else if(value.charCodeAt(0) > 48 || value.charCodeAt(0) < 57){
-          BlankTd.innerHTML = "First letter can't be number";
-          BlankTd.style.background = 'red';
-          BlankTd.style.color = 'white';
+        // else if(!isNaN(value[0])){ 
+        //   //isNaN means not a number; it checks if string is a number or not; returns true if it is not a number;
+        //   BlankTd.innerHTML = "First Charater can not be number";
+        //   BlankTd.style.background = 'red';
+        //   BlankTd.style.color = 'white';
+        // }
+        else{
+          for(var i = 0; i<value.length ; i++)
+          {
+            if(!isNaN(value[i]))
+            {
+              BlankTd.innerHTML = "Name Can not be number";
+              BlankTd.style.background = 'red';
+              BlankTd.style.color = 'white';
+            }
+          }
         }
-        
+
+
         //console.log(value.charCodeAt(0));
 
       }
