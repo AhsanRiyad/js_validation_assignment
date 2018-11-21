@@ -91,6 +91,7 @@
 
     <script type="text/javascript">
 
+      //check if it is a character
       function checkCharacter(val){
         val = val.charCodeAt(0);        
         switch(true)
@@ -170,13 +171,14 @@
       function nameVal(e){
         var value = e.value.trim();
         var BlankTd =  e.parentNode.parentNode.lastElementChild;
-        
+        var valueSplitOnSpace = value.split(' ');
 
 
         if(value === ''){
           BlankTd.innerHTML = 'Name can not be empty';
           BlankTd.style.background = 'red';
           BlankTd.style.color = 'white';
+          return;
 
         }        
         else if(!checkCharacter(value[0]))
@@ -184,16 +186,26 @@
           BlankTd.innerHTML = 'First character invalid';
           BlankTd.style.background = 'red';
           BlankTd.style.color = 'white';
+          return;
         }
         else if(checkValidChar(value)==false){
           BlankTd.innerHTML = 'Character invalid';
           BlankTd.style.background = 'red';
           BlankTd.style.color = 'white';
+          return;
         }
+        else if(value.search(' ')==-1){
+          BlankTd.innerHTML = 'At least two name';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+        }
+        
         else{
           BlankTd.innerHTML = 'Valid';
           BlankTd.style.background = 'green';
           BlankTd.style.color = 'white';
+          return;
         }
 
         //console.log(value.charCodeAt(0));
