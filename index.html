@@ -29,7 +29,7 @@
       <tr height="40px">
         <td><b>Email</b></td>                
         <td>
-          <input type="text" name=""></td>
+          <input onblur="emailVal(this);" type="text" name=""></td>
           <td class="valStatus">Validation Status</td>
         </tr>
         <tr height="40px">
@@ -146,6 +146,32 @@
         }
       }
 
+      //function for checking a word/sentence for email
+      function checkValidCharForEmail(value){
+        for(var i=0; i<value.length; i++){
+          var val = value.charCodeAt(i);        
+          switch(true)
+          {
+            case (val>=65 && val<=90): //a-z
+            console.log('A-Z');
+            continue;
+            case (val>=97 && val<=122): //A-Z
+            console.log('a-z');
+            continue;
+            case (val>=48 && val<=57): //A-Z
+            console.log('number 0-9');
+            continue;
+            case (val == 32 || val == 45 || val == 46 || val == 64 || val == 95): // space , - , . , @ , _
+            console.log('Other caracter');
+            continue;
+            default:
+            return false;
+            
+          }
+        }
+      }
+
+
       //array element length check
       function checkNameArray(fullName , BlankTd){
 
@@ -215,6 +241,47 @@
         }
       }
 
+
+      //email validation
+      function emailVal(e){
+        var value = e.value.trim();
+        var BlankTd =  e.parentNode.parentNode.lastElementChild;
+
+
+        if(value === ''){
+          BlankTd.innerHTML = 'Name can not be empty';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+
+        }
+        else if(!checkCharacter(value[0]))
+        {
+          BlankTd.innerHTML = 'First character invalid';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+        }
+        else if(value.search(' ')>-1){
+          BlankTd.innerHTML = 'Internal Space is not allowed';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+        }
+        else if(checkValidCharForEmail(value)==false){
+          BlankTd.innerHTML = 'Character invalid';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+        }
+        else{
+          BlankTd.innerHTML = 'Valid';
+          BlankTd.style.background = 'green';
+          BlankTd.style.color = 'white';
+        }
+
+
+      }
 
     </script>
 
