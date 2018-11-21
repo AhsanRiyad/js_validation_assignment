@@ -27,6 +27,12 @@
         <td class="valStatus">Validation Status</td>
       </tr>
       <tr height="40px">
+        <td width="100px"><b>ID</b></td>
+        <td width="350px"> <input type="text" name="" id='IdInputId'> <br>
+        </td>
+        <td class="valStatus">Validation Status</td>
+      </tr>
+      <tr height="40px">
         <td><b>Email</b></td>                
         <td>
           <input id="IdInputEmail" type="text" name=""></td>
@@ -280,6 +286,46 @@
           }
 
         }
+      }
+
+      //id validation
+      function idVal(){
+        var obj = document.getElementById('IdInputId');
+        var value = obj.value.trim();
+        var BlankTd =  obj.parentNode.parentNode.lastElementChild;
+        
+        if(value=="")
+        {
+          BlankTd.innerHTML = 'id can not be empty';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+        }
+        else if(isNaN(value)){
+          BlankTd.innerHTML = 'id should be a number';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+        }
+        else if(!isNaN(value)){
+          value = Number(value);
+          if(!Number.isInteger(value)){
+            BlankTd.innerHTML = 'integer only';
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+            return;
+          }
+          if(Number.isInteger(value)){
+            BlankTd.innerHTML = 'Valid';
+            BlankTd.style.background = 'green';
+            BlankTd.style.color = 'white';
+            return;
+          }
+          
+        }
+        
+
+
       }
 
 
@@ -564,6 +610,7 @@
         valBloodGroup();
         valDegree();
         validateDOB();
+        idVal();
 
       }
 
