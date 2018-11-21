@@ -6,21 +6,44 @@
 
 
 <script>
-	//continue statement does not support in switch case
+	//continue statement does not support in switch case// but if 
 	
-	for(var i=0; i<10; i++)
-	{
-		switch(true){
-			case(i >= 0):
-			console.log('i>0');
-			continue;
-			case(i > 2):
-			console.log('i>2');
-			continue;
-			default:
-			console.log('this is default block');
-		}
-	}
+	function checkValidChar(value){
+        for(var i=0; i<value.length; i++){
+          var val = value.charCodeAt(i);        
+          switch(true)
+          {
+            case (val>=65 && val<=90): //a-z
+            console.log('A-Z');
+            continue;
+            case (val>=97 && val<=122): //A-Z
+            console.log('a-z');
+            continue;
+            case (val == 32 || val == 45 || val == 46): // space , - , .
+            console.log('Other caracter');
+            continue;
+            default:
+            return false;
+            
+          }
+        }
+      }
+
+      function checkValidChar1(value){
+        for(var i=0; i<value.length; i++){
+          var val = value.charCodeAt(i);        
+          console.log(val);
+
+        }
+      }
+      checkValidChar('riyad<<<R-');
+      // if(!checkValidChar1('riyad2'))
+      // {
+      // 	console.log('invalid');
+      // }
+      // else{
+      // 	console.log('true');
+      // }
 
 	
 
