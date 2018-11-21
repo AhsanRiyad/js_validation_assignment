@@ -5,8 +5,30 @@
 
 
 <script>
-	var i = "hellow world";
-	var j =  i.search('d');
-	console.log('j');
+	function checkLeapYear(year){
+        if(year%4 == 0)
+        {
+          if(year%100 == 0)
+          {
+            if(year%400){
+              return true;
+            }
+            else{
+              return false;
+            }
+          }
+          else{
+            return true;
+          }
+        }
+        else{
+          return false;
+        }
+
+      }
+
+       console.log(checkLeapYear(2008));
+
+
 
 </script>

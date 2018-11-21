@@ -42,13 +42,13 @@
           <td class="valStatus" id="IdGenderValStatus">Validation Status</td>
         </tr>
         <tr height="40px">
-          <td><b>Date of Berth</b></td>
+          <td><b>Date of Birth</b></td>
           <td>
-            <input type="number" name="" style="width: 45px">/
-            <input  type="number" name="" style="width: 45px">/
-            <input  type="number" name="" style="width: 45px"><i>(dd/mm/yyy)</i>
+            <input disabled="true" id="day" value="" type="number" name="" style="width: 45px" placeholder="day">/
+            <input disabled="true" id="month" value="" type="number" name="" style="width: 45px" placeholder="month">/
+            <input id="year" value="" type="number" name="" style="width: 45px" placeholder="year"><i>(dd/mm/yyy)</i>
           </td>
-          <td class="valStatus">Validation Status</td>
+          <td class="valStatus" id="IdDobValStatus">Validation Status</td>
         </tr>
         <tr height="40px">
           <td><b>Blood Group</b></td>
@@ -91,6 +91,31 @@
     </form>
 
     <script type="text/javascript">
+
+      //leap year check
+      function checkLeapYear(year){
+        if(year%4 == 0)
+        {
+          if(year%100 == 0)
+          {
+            if(year%400){
+              return true;
+            }
+            else{
+              return false;
+            }
+          }
+          else{
+            return true;
+          }
+        }
+        else{
+          return false;
+        }
+
+      }
+
+
 
       //check if it is a character
       function checkCharacter(val){
@@ -326,31 +351,31 @@
               var valueSplitOnDot = valueSplitOnAtTheRateOf[1].split('.');
               
               if(valueSplitOnDot.length>1){
-              responseT =  checkNameArray(valueSplitOnDot);
-              if(responseT == 'short'){
-                BlankTd.innerHTML = 'domain/extention too short';
-                BlankTd.style.background = 'red';
-                BlankTd.style.color = 'white';
-                return;     
-              }
-              else if(responseT == 'space')
-              {
-                BlankTd.innerHTML = 'value after . expected';
-                BlankTd.style.background = 'red';
-                BlankTd.style.color = 'white';
-                return;  
+                responseT =  checkNameArray(valueSplitOnDot);
+                if(responseT == 'short'){
+                  BlankTd.innerHTML = 'domain/extention too short';
+                  BlankTd.style.background = 'red';
+                  BlankTd.style.color = 'white';
+                  return;     
+                }
+                else if(responseT == 'space')
+                {
+                  BlankTd.innerHTML = 'value after . expected';
+                  BlankTd.style.background = 'red';
+                  BlankTd.style.color = 'white';
+                  return;  
+                }
+                else{
+                  BlankTd.innerHTML = "valid";
+                  BlankTd.style.background = 'green';
+                  BlankTd.style.color = 'white';
+                }
               }
               else{
-                BlankTd.innerHTML = "valid";
-                BlankTd.style.background = 'green';
+                BlankTd.innerHTML = 'domain/extention missing '+valueSplitOnAtTheRateOf[1].search('.') + valueSplitOnAtTheRateOf[1];
+                BlankTd.style.background = 'red';
                 BlankTd.style.color = 'white';
               }
-            }
-            else{
-              BlankTd.innerHTML = 'domain/extention missing '+valueSplitOnAtTheRateOf[1].search('.') + valueSplitOnAtTheRateOf[1];
-              BlankTd.style.background = 'red';
-              BlankTd.style.color = 'white';
-            }
 
             }
             else{
@@ -438,12 +463,107 @@
         }
       }
 
+      function validateDOB(){
+        var day = document.getElementById('day');
+        var month = document.getElementById('month');
+        var year = document.getElementById('year');
+        var BlankTd = document.getElementById('IdDobValStatus');
+
+        
+        //year validation
+        if(year.value == "")
+        {
+          BlankTd.innerHTML = 'year can not be empty';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+        }
+        else if(year.value>2016 || year.value<1900){
+          BlankTd.innerHTML = "year not in range";
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+          return;
+        }
+        else if(year.value<2016 || year.value>1900)
+        {
+          month.disabled = false;
+          BlankTd.innerHTML = "select month";
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+        //month validation
+        if(month.value == "")
+        {
+          BlankTd.innerHTML = 'month can not be empty';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+        else if(month.value>12){
+          BlankTd.innerHTML = "month can't be greater than 12";
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+        else if(month.value<13)
+        {
+          day.disabled = false;
+          BlankTd.innerHTML = "select day";
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+
+        var leapYearStatus = checkLeapYear(year.value);
+        //day validation
+        if(day.value !="")
+        {
+          if(leapYearStatus==false && month.value == 2 && day.value > 28)
+          {
+            BlankTd.innerHTML = "Not a leap year detected; february can be more than 28";
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+          }
+          else if(leapYearStatus==true && month.value == 2 && day.value > 29){
+            BlankTd.innerHTML = "leap year detected; february cant be more than 29";
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+          }
+          else if(month.value%2 == 0 && day.value>30){
+            BlankTd.innerHTML = "day cant be more than 30";
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+          }
+          else if(month.value%2 == 1 && day.value>31){
+            BlankTd.innerHTML = "day cant be more than 31";
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+          }
+          else{
+            if(leapYearStatus == true){
+              BlankTd.innerHTML = "valid ; leap year detected";
+              BlankTd.style.background = 'green';
+              BlankTd.style.color = 'white';
+            }
+            else{
+              BlankTd.innerHTML = "valid ; not a leap year";
+              BlankTd.style.background = 'green';
+              BlankTd.style.color = 'white';
+            }
+            
+          }
+
+          
+        }
+        
+
+
+      }
+
       function validateAll(){
         nameVal();
         emailVal();
         genderVal();
         valBloodGroup();
         valDegree();
+        validateDOB();
 
       }
 
