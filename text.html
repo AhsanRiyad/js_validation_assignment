@@ -14,14 +14,16 @@
           switch(true)
           {
             case (val>=65 && val<=90): //a-z
-            console.log('A-Z'+val);
-            
+            console.log('A-Z');
+            continue;
             case (val>=97 && val<=122): //A-Z
-            console.log('a-z'+val);
-            
-            case (val>=66 && val<=85): //A-Z
-            console.log('other'+val);
-            
+            console.log('a-z');
+            continue;
+            case (val == 32 || val == 45 || val == 46): // space , - , .
+            console.log('Other caracter');
+            continue;
+            default:
+            return false;
             
           }
         }
@@ -34,7 +36,7 @@
 
         }
       }
-      checkValidChar('riyad');
+      checkValidChar('riyad<<<R-');
       // if(!checkValidChar1('riyad2'))
       // {
       // 	console.log('invalid');
