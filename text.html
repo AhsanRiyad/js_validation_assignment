@@ -1,25 +1,32 @@
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
 
-<select id='IdInputBloodGroup'">
-	<option value="select">Select</option>
-	<option value="A+">A+</option>
-	<option value="A-">A-</option>
-	<option value="B+">B+</option>
-	<option value="B-">B-</option>
-</select>
-
+<input type="checkbox" name="degree" value="SSC">SSC
+<input type="checkbox" name="degree" value="HSC">HSC
+<input type="checkbox" name="degree" value="BSC">BSc.
+<input type="checkbox" name="degree" value="MSC">MSc.
+<input type="button" onclick="valBloodGroup()" id='button22' value="button">
 
 
 <script>
 	function valBloodGroup(){
-		var val = "";
-		var obj = document.getElementById("IdInputBloodGroup");
-		var strUser = obj.options[obj.selectedIndex].value;
-		alert(strUser);
+		var obj = document.getElementsByName('degree');
+		var valueArray = [];
+		for(var i =0; i<obj.length ; i++)
+		{
+			if(obj[i].checked == true)
+			{
+				valueArray.push(obj[i].value);
+			}
+		}
+		valueArray.forEach(myFun)
+
+
 	}
 
-
+	function myFun(value){
+		console.log(value);
+	}
 
 
 </script>
