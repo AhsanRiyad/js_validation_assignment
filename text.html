@@ -6,20 +6,24 @@
 
 
 <script>
-	function checkCharacter(val){
-		//val = val.charCodeAt(0);        
-		switch (true) {
-			case (val >= 100):
-			return 100;
-			case (val >= 200):
-			return 200;
+	//continue statement does not support in switch case
+	
+	for(var i=0; i<10; i++)
+	{
+		switch(true){
+			case(i >= 0):
+			console.log('i>0');
+			continue;
+			case(i > 2):
+			console.log('i>2');
+			continue;
 			default:
-			console.log("default");
+			console.log('this is default block');
 		}
-
-		
 	}
 
-console.log(checkCharacter(200));
+	
 
-	</script>
+
+
+</script>

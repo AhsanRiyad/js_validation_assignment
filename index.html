@@ -2,8 +2,8 @@
 <html>
 
 <head>
-<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-<meta content="utf-8" http-equiv="encoding">
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
 
 
   <title>Form</title>
@@ -101,15 +101,27 @@
           return true;
           default:
           return false;
-
         }
-
-
-
-
       }
 
-      function checkValidChar(val)
+      function checkValidChar(value){
+        for(var i=0; i<value.length; i++){
+          var val = value.charCodeAt(i);        
+          switch(true)
+          {
+            case (val>=65 && val<=90): //a-z
+            continue;
+            case (val>=97 && val<=122): //A-Z
+            continue;
+            case (val == 32 || val == 45 || val == 46): // space , - , .
+            continue;
+            default:
+            return false;
+          }
+        }
+      }
+
+      function checkValidChar1(val)
       {
         for(var i = 0; i< val.length ; i++){
           if(val.charCodeAt(0) >= 65 && val.charCodeAt(0) <= 90){
@@ -143,6 +155,11 @@
         else if(!checkCharacter(value[0]))
         {
           BlankTd.innerHTML = 'First character invalid';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
+        }
+        else if(!checkValidChar(value)){
+          BlankTd.innerHTML = 'Character invalid';
           BlankTd.style.background = 'red';
           BlankTd.style.color = 'white';
         }
