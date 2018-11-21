@@ -173,7 +173,7 @@
 
 
       //array element length check
-      function checkNameArray(fullName , BlankTd){
+      function checkNameArray(fullName){
 
         for(var i=0 ; i< fullName.length ; i++)
         {
@@ -230,7 +230,7 @@
           return;
         }
         else if(value.search(' ')>-1){
-          var responseT =  checkNameArray(valueSplitOnSpace , BlankTd);
+          var responseT =  checkNameArray(valueSplitOnSpace);
           if(responseT == 'space')
           {
             BlankTd.innerHTML = 'multiple space detected';
@@ -251,7 +251,7 @@
             BlankTd.style.color = 'white';
             return;     
           }
-       
+
         }
       }
 
@@ -260,6 +260,7 @@
       function emailVal(e){
         var value = e.value.trim();
         var BlankTd =  e.parentNode.parentNode.lastElementChild;
+        var valueSplitOnAtTheRateOf = value.split('@');
 
 
         if(value === ''){
@@ -288,11 +289,45 @@
           BlankTd.style.color = 'white';
           return;
         }
-        else{
-          BlankTd.innerHTML = 'Valid';
-          BlankTd.style.background = 'green';
+        else if(value.search('@')==-1){
+          BlankTd.innerHTML = 'Must contain @';
+          BlankTd.style.background = 'red';
           BlankTd.style.color = 'white';
+          return;
         }
+        else if(value.search('@')>-1){
+
+          if(valueSplitOnAtTheRateOf.length>2){
+            BlankTd.innerHTML = 'multiple @ detected';
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+            return;
+          }
+          var responseT =  checkNameArray(valueSplitOnAtTheRateOf);
+          if(responseT == 'short'){
+            BlankTd.innerHTML = 'name too short';
+            BlankTd.style.background = 'red';
+            BlankTd.style.color = 'white';
+            return;     
+          }
+          else{
+            var valueSplitOnDot = valueSplitOnAtTheRateOf[1].split('.');
+            responseT =  checkNameArray(valueSplitOnDot);
+            if(responseT == 'short'){
+              BlankTd.innerHTML = 'domain/extention too short';
+              BlankTd.style.background = 'red';
+              BlankTd.style.color = 'white';
+              return;     
+            }
+            else{
+              BlankTd.innerHTML = "valid";
+              BlankTd.style.background = 'green';
+              BlankTd.style.color = 'white';
+            }
+            
+          }
+        }
+
 
 
       }
