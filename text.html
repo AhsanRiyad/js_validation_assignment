@@ -1,30 +1,23 @@
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 <meta content="utf-8" http-equiv="encoding">
 
-<td>
-	<input type="radio" name="Gender" value="1">Male
-	<input type="radio" name="Gender" value="2">Female
-	<input type="radio" name="Gender" value="3">Other
-</td>
+<select id='IdInputBloodGroup' onchange="valBloodGroup()">
+	<option value="select">Select</option>
+	<option value="A+">A+</option>
+	<option value="A-">A-</option>
+	<option value="B+">B+</option>
+	<option value="B-">B-</option>
+</select>
 
 
 
 <script>
-	function radioChck(e){
-
-	var radios = document.getElementsByName('Gender');
-	for (var i = 0, length = radios.length; i < length; i++)
-	{
-		if (radios[i].checked)
-		{
-  // do whatever you want with the checked radio
-  		alert(radios[i].value);
-
-  // only one radio can be logically checked, don't check the rest
-  		break;
-		}
+	function valBloodGroup(){
+		var val = "";
+		var obj = document.getElementById("IdInputBloodGroup");
+		var strUser = obj.options[obj.selectedIndex].value;
+		alert(strUser);
 	}
-}
 
 
 
