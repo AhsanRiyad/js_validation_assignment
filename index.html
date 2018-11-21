@@ -2,6 +2,12 @@
 <html>
 <head>
   <title>Form</title>
+  <style>
+  .valStatus{
+    background: #0099ff;
+    color: white;
+  }
+</style>
 </head>
 <body>
   <form>
@@ -13,13 +19,13 @@
         <td width="100px"><b>Name</b></td>
         <td width="350px"> <input onblur="nameVal(this);" type="text" name="" id='IdInputName'> <br>
         </td>
-        <td></td>
+        <td class="valStatus">Validation Status</td>
       </tr>
       <tr height="40px">
         <td><b>Email</b></td>                
         <td>
           <input type="text" name=""></td>
-          <td></td>
+          <td class="valStatus">Validation Status</td>
         </tr>
         <tr height="40px">
           <td><b>Gender</b></td>
@@ -28,7 +34,7 @@
             <input type="radio" name="Gender" >Female
             <input type="radio" name="Gender" >Other
           </td>
-          <td></td>
+          <td class="valStatus">Validation Status</td>
         </tr>
         <tr height="40px">
           <td><b>Date of Berth</b></td>
@@ -37,7 +43,7 @@
             <input  type="number" name="" style="width: 45px">/
             <input  type="number" name="" style="width: 45px"><i>(dd/mm/yyy)</i>
           </td>
-          <td></td>
+          <td class="valStatus">Validation Status</td>
         </tr>
         <tr height="40px">
           <td><b>Blood Group</b></td>
@@ -49,7 +55,7 @@
               <option value="B-">B-</option>
             </select>
           </td>
-          <td></td>
+          <td class="valStatus">Validation Status</td>
         </tr>
         <tr height="40px">
           <td><b>Degree</b></td>
@@ -59,14 +65,14 @@
             <input type="checkbox" name="">BSc.
             <input type="checkbox" name="">MSc.
           </td>
-          <td></td>
+          <td class="valStatus">Validation Status</td>
         </tr>
-        <tr height="40px">
+        <!-- <tr height="40px">
           <td><b>Photo</b></td>
           <td> <input type="file" name=""></td>
-          <td></td>
+          <td class="valStatus">Validation Status</td>
         </tr>
-        <tr>
+        <tr> -->
           <td colspan="3" height="40px"></td>
         </tr>
         <tr>
@@ -80,11 +86,43 @@
 
     <script type="text/javascript">
 
+      function checkCharacter(val){
+        if(val.charCodeAt(0) >= 65 && val.charCodeAt(0) <= 90){
+          return true;
+        }
+        else if(val.charCodeAt(0) >= 97 && val.charCodeAt(0) <= 122){
+          return true;
+        }
+        else{
+          return false;
+        }
+
+      }
+
+      function checkValidChar(val)
+      {
+        for(var i = 0; i< val.length ; i++){
+          if(val.charCodeAt(0) >= 65 && val.charCodeAt(0) <= 90){
+            continue;
+          }
+          else if(val.charCodeAt(0) >= 97 && val.charCodeAt(0) <= 122){
+            continue;
+          }
+          else if(val.charCodeAt(0) == 32 || val.charCodeAt(0) == 45 || val.charCodeAt(0) == 46){
+            continue;
+          }
+          else{
+            return false;
+          }
+        }
+      }
+
+
       function nameVal(e){
         var value = e.value.trim();
         var BlankTd =  e.parentNode.parentNode.lastElementChild;
-        BlankTd.innerHTML = 'wrong';
-        //BlankTd.innerHTML = value[0];
+        
+
 
         if(value === ''){
           BlankTd.innerHTML = 'Name can not be empty';
@@ -92,24 +130,17 @@
           BlankTd.style.color = 'white';
 
         }        
-        // else if(!isNaN(value[0])){ 
-        //   //isNaN means not a number; it checks if string is a number or not; returns true if it is not a number;
-        //   BlankTd.innerHTML = "First Charater can not be number";
-        //   BlankTd.style.background = 'red';
-        //   BlankTd.style.color = 'white';
-        // }
-        else{
-          for(var i = 0; i<value.length ; i++)
-          {
-            if(!isNaN(value[i]))
-            {
-              BlankTd.innerHTML = "Name Can not be number";
-              BlankTd.style.background = 'red';
-              BlankTd.style.color = 'white';
-            }
-          }
+        else if(!checkCharacter(value[0]))
+        {
+          BlankTd.innerHTML = 'First character invalid';
+          BlankTd.style.background = 'red';
+          BlankTd.style.color = 'white';
         }
-
+        else{
+          BlankTd.innerHTML = 'Valid';
+          BlankTd.style.background = 'green';
+          BlankTd.style.color = 'white';
+        }
 
         //console.log(value.charCodeAt(0));
 
