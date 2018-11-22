@@ -123,14 +123,14 @@
 
 
 
-      //check if it is a character
+      //check if it is a alphabet (A-Z // a-z) // checks single character
       function checkCharacter(val){
         val = val.charCodeAt(0);        
         switch(true)
         {
-          case (val>=65 && val<=90):
+          case (val>=65 && val<=90): //a-z
           return true;
-          case (val>=97 && val<=122):
+          case (val>=97 && val<=122): //A-Z
           return true;
           default:
           return false;
@@ -138,7 +138,7 @@
       }
 
 
-      //function for checking a first character/a character of a specific position
+      //checks a word/sentence // (a-z // A-Z // space ' ' , '-'' , '.'')
       function checkValidChar(value){
         for(var i=0; i<value.length; i++){
           var val = value.charCodeAt(i);        
@@ -156,7 +156,7 @@
         }
       }
 
-      //function for checking a word/sentence
+      //checks a word/sentence // (a-z // A-Z // space ' ' , '-'' , '.'')
       function checkValidChar(value){
         for(var i=0; i<value.length; i++){
           var val = value.charCodeAt(i);        
@@ -178,7 +178,7 @@
         }
       }
 
-      //function for checking a word/sentence for email
+      //checks a word/sentence for email // space ' ' , '-' , '.' , '@' , '_'
       function checkValidCharForEmail(value){
         for(var i=0; i<value.length; i++){
           var val = value.charCodeAt(i);        
@@ -190,10 +190,10 @@
             case (val>=97 && val<=122): //A-Z
             console.log('a-z');
             continue;
-            case (val>=48 && val<=57): //A-Z
+            case (val>=48 && val<=57): //0-9
             console.log('number 0-9');
             continue;
-            case (val == 32 || val == 45 || val == 46 || val == 64 || val == 95): // space , - , . , @ , _
+            case (val == 32 || val == 45 || val == 46 || val == 64 || val == 95): // 
             console.log('Other caracter');
             continue;
             default:
