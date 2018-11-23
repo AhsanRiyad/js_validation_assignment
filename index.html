@@ -178,6 +178,30 @@
         }
       }
 
+      function checkValidChar(value){
+        for(var i=0; i<value.length; i++){
+          var val = value.charCodeAt(i);        
+          switch(true)
+          {
+            case (val>=65 && val<=90): //a-z
+            console.log('A-Z');
+            continue;
+            case (val>=97 && val<=122): //A-Z
+            console.log('a-z');
+            continue;
+            case (val == 32 || val == 45 || val == 46): // space , - , .
+            console.log('Other caracter');
+            continue;
+            default:
+            return false;
+            
+          }
+        }
+      }
+
+
+
+      
       //checks a word/sentence for email // space ' ' , '-' , '.' , '@' , '_'
       function checkValidCharForEmail(value){
         for(var i=0; i<value.length; i++){
@@ -226,6 +250,35 @@
         
         return 'okay'; //no problem ; validate it;
       }
+
+
+      //array element length check for email extention[.com part]
+      function checkEmailExtentionLength(fullName){
+
+        for(var i=0 ; i< fullName.length ; i++)
+        {
+
+          if( fullName[i].length  == 0)
+          {
+
+            return 'space'; //multiple space detected
+          }
+          else if( fullName[i].length  == 1)
+          {
+
+            return 'short'; //name too short
+          }
+          else if(fullName[i].length  > 5)
+          {
+            return 'long' ; 
+          }
+
+        }
+        
+        return 'okay'; //no problem ; validate it;
+      }
+
+
 
 
       //name validation function
@@ -397,7 +450,7 @@
               var valueSplitOnDot = valueSplitOnAtTheRateOf[1].split('.');
               
               if(valueSplitOnDot.length>1){
-                responseT =  checkNameArray(valueSplitOnDot);
+                var responseT =  checkEmailExtentionLength(valueSplitOnDot);
                 if(responseT == 'short'){
                   BlankTd.innerHTML = 'domain/extention too short';
                   BlankTd.style.background = 'red';
@@ -407,6 +460,14 @@
                 else if(responseT == 'space')
                 {
                   BlankTd.innerHTML = 'value after . expected';
+                  BlankTd.style.background = 'red';
+                  BlankTd.style.color = 'white';
+                  return;  
+                }
+
+                else if(responseT == 'long')
+                {
+                  BlankTd.innerHTML = 'extention too long';
                   BlankTd.style.background = 'red';
                   BlankTd.style.color = 'white';
                   return;  
