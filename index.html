@@ -178,6 +178,27 @@
         }
       }
 
+      //checks a word/sentence // (a-z // A-Z)
+      function checkValidCharForEmailExtention(value){
+        for(var i=0; i<value.length; i++){
+          var val = value.charCodeAt(i);        
+          switch(true)
+          {
+            case (val>=65 && val<=90): //a-z
+            console.log('A-Z');
+            continue;
+            case (val>=97 && val<=122): //A-Z
+            console.log('a-z');
+            continue;
+            default:
+            return false;
+            
+          }
+        }
+      }
+
+
+
       function checkValidChar(value){
         for(var i=0; i<value.length; i++){
           var val = value.charCodeAt(i);        
@@ -201,7 +222,7 @@
 
 
 
-      
+
       //checks a word/sentence for email // space ' ' , '-' , '.' , '@' , '_'
       function checkValidCharForEmail(value){
         for(var i=0; i<value.length; i++){
@@ -451,6 +472,8 @@
               
               if(valueSplitOnDot.length>1){
                 var responseT =  checkEmailExtentionLength(valueSplitOnDot);
+                var responseValidationOfDigit = checkValidCharForEmailExtention(valueSplitOnDot[1]);
+
                 if(responseT == 'short'){
                   BlankTd.innerHTML = 'domain/extention too short';
                   BlankTd.style.background = 'red';
@@ -464,7 +487,12 @@
                   BlankTd.style.color = 'white';
                   return;  
                 }
-
+                else if(responseValidationOfDigit == false){
+                  BlankTd.innerHTML = 'extention cant contain number';
+                  BlankTd.style.background = 'red';
+                  BlankTd.style.color = 'white';
+                  return;  
+                }
                 else if(responseT == 'long')
                 {
                   BlankTd.innerHTML = 'extention too long';
