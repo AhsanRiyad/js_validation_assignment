@@ -18,7 +18,7 @@
   <form>
     <table border="1" width="600px" align="center">
       <tr height="100px">
-        <td colspan="3" align="center"><h2>PERSON PROFILE</h2></td>
+        <td colspan="3" align="center"><h2 id="headerText">PERSON PROFILE</h2></td>
       </tr>
       <tr height="40px">
         <td width="100px"><b>Name</b></td>
@@ -289,7 +289,7 @@
 
             return 'short'; //name too short
           }
-          else if(fullName[i].length  > 5)
+          else if(fullName[i].length  > 8)
           {
             return 'long' ; 
           }
@@ -356,7 +356,7 @@
             BlankTd.innerHTML = 'Valid';
             BlankTd.style.background = 'green';
             BlankTd.style.color = 'white';
-            return;     
+            return 'valid';     
           }
 
         }
@@ -393,7 +393,7 @@
             BlankTd.innerHTML = 'Valid';
             BlankTd.style.background = 'green';
             BlankTd.style.color = 'white';
-            return;
+            return 'valid';
           }
           
         }
@@ -504,6 +504,7 @@
                   BlankTd.innerHTML = "valid";
                   BlankTd.style.background = 'green';
                   BlankTd.style.color = 'white';
+                  return 'valid';
                 }
               }
               else{
@@ -548,6 +549,7 @@
           BlankTd.innerHTML = "valid";
           BlankTd.style.background = 'green';
           BlankTd.style.color = 'white';
+          return 'valid';
         }
 
 
@@ -570,6 +572,7 @@
           BlankTd.innerHTML = "valid";
           BlankTd.style.background = 'green';
           BlankTd.style.color = 'white';
+          return 'valid';
         }
       }
 
@@ -590,6 +593,7 @@
           BlankTd.innerHTML = "valid";
           BlankTd.style.background = 'green';
           BlankTd.style.color = 'white';
+          return 'valid';
         }
         else{
           BlankTd.innerHTML = 'one item must be selected';
@@ -688,11 +692,13 @@
               BlankTd.innerHTML = "valid ; leap year detected";
               BlankTd.style.background = 'green';
               BlankTd.style.color = 'white';
+              return 'valid';
             }
             else{
               BlankTd.innerHTML = "valid ; not a leap year";
               BlankTd.style.background = 'green';
               BlankTd.style.color = 'white';
+              return 'valid';
             }
             
           }
@@ -705,13 +711,24 @@
       }
 
       function validateAll(){
-        nameVal();
-        emailVal();
-        genderVal();
-        valBloodGroup();
-        valDegree();
-        validateDOB();
-        idVal();
+        let name = nameVal();
+        let email = emailVal();
+        let gender = genderVal();
+        let blood = valBloodGroup();
+        let degree = valDegree();
+        let dob = validateDOB();
+        let id = idVal();
+
+        console.log(name+email+gender+blood+degree+dob+id);
+
+        if(name=='valid' && email=='valid' && gender == 'valid' && blood == 'valid' && degree == 'valid' && dob=='valid' && id=='valid')
+        {
+          console.log('inside');
+          var i = document.getElementById('headerText');
+
+          i.innerHTML = "true";
+        }
+
 
       }
 
