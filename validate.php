@@ -1,10 +1,10 @@
 <?php 
-$name = $_GET['name'];
-$id = $_GET['id'];
-$email = $_GET['email'];
+//$name = $_POST['name'];
+//$id = $_POST['id'];
 
 
-echo $name;
+
+echo 'helloz';
 
 
 

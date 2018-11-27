@@ -713,11 +713,12 @@
 
 
       function loadDoc() {
+        console.log('inside ajax');
         var aaName = document.getElementById('IdInputName').value;
         var aaId = document.getElementById('IdInputId').value;
         var aaEmail = document.getElementById('IdInputEmail').value;
 
-        var string1 = 'validate.php?'+'name='+aaName+'&id='+aaId+'&email='+aaEmail;
+        var string1 = "";
         console.log(string1);
 
         var xhttp = new XMLHttpRequest();
@@ -726,8 +727,9 @@
            document.getElementById("headerText").innerHTML = this.responseText;
          }
        };
-       xhttp.open("GET", string1, true);
-       xhttp.send();
+       xhttp.open("POST", "validate.php", true);
+       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+       xhttp.send("name="+aaName+"&id="+aaId);
      }
 
 
