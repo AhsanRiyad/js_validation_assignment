@@ -710,30 +710,52 @@
 
       }
 
-      function validateAll(){
-        let name = nameVal();
-        let email = emailVal();
-        let gender = genderVal();
-        let blood = valBloodGroup();
-        let degree = valDegree();
-        let dob = validateDOB();
-        let id = idVal();
-
-        console.log(name+email+gender+blood+degree+dob+id);
-
-        if(name=='valid' && email=='valid' && gender == 'valid' && blood == 'valid' && degree == 'valid' && dob=='valid' && id=='valid')
-        {
-          console.log('inside');
-          var i = document.getElementById('headerText');
-
-          i.innerHTML = "true";
-        }
 
 
+      function loadDoc() {
+        var aaName = document.getElementById('IdInputName').value;
+        var aaId = document.getElementById('IdInputId').value;
+        var aaEmail = document.getElementById('IdInputEmail').value;
+
+        var string1 = 'validate.php?'+'name='+aaName+'&id='+aaId+'&email='+aaEmail;
+        console.log(string1);
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+           document.getElementById("headerText").innerHTML = this.responseText;
+         }
+       };
+       xhttp.open("GET", string1, true);
+       xhttp.send();
+     }
+
+
+
+     function validateAll(){
+      let name = nameVal();
+      let email = emailVal();
+      let gender = genderVal();
+      let blood = valBloodGroup();
+      let degree = valDegree();
+      let dob = validateDOB();
+      let id = idVal();
+
+      console.log(name+email+gender+blood+degree+dob+id);
+
+      if(name=='valid' && email=='valid' && gender == 'valid' && blood == 'valid' && degree == 'valid' && dob=='valid' && id=='valid')
+      {
+        console.log('inside');
+        var i = document.getElementById('headerText');
+
+        loadDoc();
       }
 
-    </script>
+
+    }
+
+  </script>
 
 
-  </body>
-  </html>
+</body>
+</html>
