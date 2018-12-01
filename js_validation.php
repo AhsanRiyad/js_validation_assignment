@@ -98,6 +98,10 @@
 
     <script type="text/javascript">
 
+      var genderValueGlobal;
+      var bloodValueGlobal;
+
+
       //leap year check
       function checkLeapYear(year){
         if(year%4 == 0)
@@ -536,6 +540,7 @@
           if (radios[i].checked)
           {
             genderValueHolder =  radios[i].value;
+            genderValueGlobal = genderValueHolder;
             break;
           }
 
@@ -562,6 +567,7 @@
         var BlankTd = document.getElementById('IdBloodGroupValStaus');
         var strUser = '';
         var strUser = obj.options[obj.selectedIndex].value;
+        bloodValueGlobal = strUser;
         if(strUser == 'select' || strUser == '')
         {
           BlankTd.innerHTML = 'one item must be selected';
@@ -718,6 +724,10 @@
         var aaId = document.getElementById('IdInputId').value;
         var aaEmail = document.getElementById('IdInputEmail').value;
 
+
+        var parameterString = "name="+aaName+"&id="+aaId+"&email="+aaEmail+"&gender="+genderValueGlobal+"&blood="+bloodValueGlobal;
+
+
         var string1 = "";
         console.log(string1);
 
@@ -729,7 +739,7 @@
        };
        xhttp.open("POST", "validate.php", true);
        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-       xhttp.send("name="+aaName+"&id="+aaId);
+       xhttp.send(parameterString);
      }
 
 
